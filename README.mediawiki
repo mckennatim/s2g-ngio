@@ -1,0 +1,17 @@
+==stuff2get==
+===Description===
+Authentication is by apikey. Server then creates a token that is sent with every request. This app is for multiple users sharing access to shopping lists from multiple, sometimes shared, devices. Angular and Node will need to deal with cross domain issues. 
+
+While the database is in MongoDb on the server, this app will explore the possibilities of using local storage as the data source for the views and controllers. Every change however will get sent to the server, but the Angular app need not wait for the update, communication with the serrver will seem to be happening in the background. Changes written into local storage will be timestamped and some kind of polling mechanism will keep the client and server data stores in synch.
+====todo====
+create app routes and controllers
+
+===express/node/mongo as api that works across domains and authenticates with apikey===
+
+curl -v -d "apikey=1234567" http://10.0.1.24:3000/api/authenticate -c cookies.txt
+
+curl -c cookies.txt -b cookies.txt -G http://10.0.1.24:3000/api/account
+
+node_modules/vows/bin/vows  test/strategy-spec.js  --spec
+
+===ngClient===

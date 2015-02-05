@@ -1,0 +1,25 @@
+<div class="bkg-user col1">
+</br></br></br>
+<p>
+	<sb-online></sb-online>
+	Hey what {{users.activeUser}} 
+</p>
+<div>
+	<ul class="list-group">
+		<li ng-repeat="user in users.userList track by $index" class="list-group-item lists" ng-class="{editing: user==editedUser}" > 
+			<span class="view">
+				<i ng-click="edit(user)" class="delx glyphicon glyphicon-pencil ispace" ng-show="online"></i> 
+				<i ng-click="remove(user)" class="delx glyphicon glyphicon-remove ispace" ng-show="online"></i>
+				<span ng-click="makeActive(user)" class="list-name">{{user}}</span><br>
+			</span>	
+			<span class="edit">
+				<form ng-submit="doneEditing(user)" accept-charset="utf-8">
+
+					<input type="email" ng-trim="false" ng-model="user" item-escape="revertEdit(list)" size="18"  ></span>
+				</form>	
+			</span>  
+		</li>
+	</ul>
+	<a type="button" ng-click="goRegister()" class="label bkg-register" ng-show="online">Add User</a>
+</div>
+</div>

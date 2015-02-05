@@ -1,0 +1,29 @@
+<ul class="list group" >
+	<li ng-repeat="item in notdone = (lists.lal[lists.lal.activeList].items | filter:{done:false}) track by $index" class="list-group-item need"
+	ng-class="{editing: item==editedItem}" ng-click="onFocus()">
+	<div class="view" >
+			<input type="checkbox" ng-model="item.done" ng-change="ckDone(item)">
+			<span class="done-{{item.done}} product" ng-click="editItem(item)" >{{item.product}}</span>	
+			<span ng-show="item.amt.qty > 0" >
+				<span class="amt" >{{item.amt.qty}}  </span>
+				<span class="amt" >{{item.amt.unit}}</span>
+			</span>					
+			<span ng-show="showLoc" class="loc" >{{item.loc}}</span>					
+			<span ng-show="showTags" class="tags" ng-repeat="tag in item.tags">{{tag}} </span>			
+		<i ng-click="remove(item)" class="delx glyphicon glyphicon-remove " ></i>  			
+	</div>
+	<div class="edit">
+		<form ng-submit="doneEditing(buffer)" accept-charset="utf-8" ng-blur="revertEdit(buffer)">
+			<input ng-trim="true" ng-model="buffer.product" item-escape="revertEdit(buffer)" 
+				size="18" ng-blur="doneEditing(buffer)" placeholder="product" >
+			<input ng-trim="true" ng-model="buffer.amt.qty" item-escape="revertEdit(buffer)" size="2" placeholder="qty" >
+			<input ng-trim="true" ng-model="buffer.amt.unit" item-escape="revertEdit(buffer)" size="4" placeholder="unit" >
+	        <span>
+	          <select ng-model="buffer.loc" ng-options="name as name for name in stores.st.default.aisles" ng-click=""></select></span>
+	         </span>					
+			<input ng-trim="true" ng-model="buffer.tags" ng-list item-escape="revertEdit(buffer)" size="15" placeholder="tags" >
+			<input class="submit" type="submit" id="submit2" value="Upd" />
+		</form>
+	</div>
+	</li>
+</ul> 

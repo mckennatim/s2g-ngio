@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>3000</title>
+	<script src="https://cdn.socket.io/socket.io-1.2.1.js"></script>
+</head>
+<body>
+	<div id="chatlog"></div>
+	<input type="button" onclick="sendMessage()" value="send message"><br>
+	<select id="lidSelect" onchange="lidFunction(id)" onfocus="this.selectedIndex = -1;">
+	  <option value="Jutebi">Jutebi</option>
+	  <option value="Qitula">Qitula</option>
+	  <option value="Camala">Camala</option>
+	  <option value="Minohu">Minohu</option>
+	</select>
+	<div id="ldiv"></div>
+<script type="text/javascript">
+var lid = 'none'
+	var socket = io.connect('10.0.1.25:3000');
+	
+	function sendMessage(){
+		console.log('sentMessage to console')
+		socket.emit('message', {lid: lid, item: 'dogfood'})
+	}
+	socket.on('itemChanged', function(data){
+		console.log(JSON.stringify(data))
+		document.getElementById('chatlog').innerHTML += '<br>' + JSON.stringify(data);
+	})
+	function lidFunction(id) {
+		lid = selected(id);
+		console.log(lid);
+		socket.emit('switchLid', lid);
+	}
+	function selected(sid){
+	    var x = document.getElementById(sid);
+	    var i = x.selectedIndex;
+	    return x.options[i].text;
+	}
+</script>	
+</body>
+</html>
+

@@ -1,0 +1,13 @@
+<li ng-repeat="list in users.al[users.al.activeUser].lists track by $index" class="list-group-item lists" ng-class="{editing: list==editedList}" > 
+	<i ng-click="edit(list)" class="delx glyphicon glyphicon-pencil " ng-show="online"></i> 
+	<span class="view">
+		<span ng-click="makeDefListInfo(list)" class="list-name">{{list.shops}}</span><br>
+	</span>			 
+	<span class="edit">
+		<form ng-submit="doneEditing(list)" accept-charset="utf-8">
+			<input ng-trim="false" ng-model="list.shops" item-escape="revertEdit(list)" size="18"  ></span>
+		</form>	
+	</span>  		
+	<i ng-click="remove(list)" class="delx glyphicon glyphicon-remove " ng-show="online"></i> 			 
+	<span  class="list-lid" >repository:{{list.lid}}   </span>			
+</li>
